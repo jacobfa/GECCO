@@ -5,13 +5,11 @@ import torch_geometric
 from matplotlib.image import imsave
 from time import time
 
-from util import load_images, setup_model, load_checkpoint, load_cifar10, load_stl10, load_caltech256, load_cifar100, load_mnist
+from util import load_images, setup_model, load_checkpoint, load_mnist
 
-checkpoint_path = "./models/gnn-checkpoint-5.pt"
-# checkpoint_path = "./models/model.pt"
-IMG_SIZE = 128
+checkpoint_path = "./models/gnn-checkpoint-60.pt"
 torch.cuda.is_available()
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+device = torch.device("cuda:5" if torch.cuda.is_available() else "cpu")
 
 _, testloader = load_mnist()
 # _, testloader = load_original(device)

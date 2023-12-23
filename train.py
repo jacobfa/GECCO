@@ -3,20 +3,19 @@ import torch.nn as nn
 import torch.optim as optim
 import torch.nn.functional as F
 import torch_geometric
-from util import new_model, load_model, load_checkpoint, load_images, load_coco, load_cifar10, load_caltech256, load_stl10, load_cifar100, load_merced, load_mnist
+from util import new_model, load_model, load_checkpoint, load_images, load_mnist
 from tqdm import tqdm
 import os
 from model import Model
 
 BATCH_SIZE = 64
-IMG_SIZE = 128
 source = 'new'
 #source = 'checkpoint'
 checkpoint_step = 0
 checkpoint_path = './models/gnn-checkpoint-{}.pt'.format(checkpoint_step)
 
 
-device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+device = torch.device("cuda:5" if torch.cuda.is_available() else "cpu")
 
 trainloader, testloader = load_mnist()
 
@@ -99,7 +98,7 @@ for epoch in tqdm(range(old_epoch + 1, num_epochs+1)):
     f = open('train.log', 'a')
     f.write(log + '\n')
     f.close()
-    if epoch % 5 == 0:
+    if epoch % 10 == 0:
         checkpoint_path = './models/gnn-checkpoint-{}.pt'.format(epoch)
         torch.save({
             'epoch': epoch,
